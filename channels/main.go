@@ -18,12 +18,10 @@ func main() {
 
 	for _, link := range links {
 		go checkLink(link, c)
-		// This blocks the loop from starting the next routines, so we use a separate for loop to receive from the channel
-		// fmt.Println(<-c)
 	}
 
-	for {
-		go checkLink(<-c, c)
+	for l := range c {
+		go checkLink(l, c)
 	}
 }
 
